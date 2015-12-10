@@ -39,40 +39,36 @@ public class Logs extends HttpServlet
             out.println("<title>Repository Issue Logs</title>");
             out.println("<body>");
             
-            out.println("</br><p>Repository:<br><br>"+repo+"</p>");
+            out.println("</br><p>Repository:<br>"+repo+"</p>");
 
             if(code==0)
             {
-                out.println("<table border=\"1\" style=\"width:100%\">");
+                out.println("<table border=\"1\" style=\"width:50%\">");
                 
                 out.println("<tr>");
-                out.println("<td>Total number of open issues :</td>");
-                out.println("<td>"+el.total_open+"</td>");
+                out.println("<td>&nbsp;&nbsp;Total number of open issues :</td>");
+                out.println("<td>&nbsp;&nbsp;"+el.total_open+"</td>");
                 out.println("</tr>");
                 
                 out.println("<tr>");
-                out.println("<td>Number of open issues that were opened in the last 24 hours :</td>");
-                out.println("<td>"+el.last_24+"</td>");
+                out.println("<td>&nbsp;&nbsp;Number of open issues that were opened in the last 24 hours :</td>");
+                out.println("<td>&nbsp;&nbsp;"+el.last_24+"</td>");
                 out.println("</tr>");
                 
                 out.println("<tr>");
-                out.println("<td>Number of open issues that were opened more than 24 hours ago but less than 7 days ago :</td>");
-                out.println("<td>"+el.more_24_less_7+"</td>");
+                out.println("<td>&nbsp;&nbsp;Number of open issues that were opened more than 24 hours ago but less than 7 days ago :</td>");
+                out.println("<td>&nbsp;&nbsp;"+el.more_24_less_7+"</td>");
                 out.println("</tr>");
                 
                 out.println("<tr>");
-                out.println("<td>Number of open issues that were opened more than 7 days ago :</td>");
-                out.println("<td>"+el.more_7+"</td>");
+                out.println("<td>&nbsp;&nbsp;Number of open issues that were opened more than 7 days ago :</td>");
+                out.println("<td>&nbsp;&nbsp;"+el.more_7+"</td>");
                 out.println("</tr>");                
                 
                 out.println("<table>");
             }
             else
                 out.println("</br><p>Repository Not Found!!!</p>");
-            
-            out.println("<br><br><button onclick=\"/ExtractIssueLogs/Logs\">Refresh</button>");
-            out.println("<br><br>");
-            out.println("<button onclick=\"/ExtractIssueLogs/\">Back</button>");
             
             out.println("</body>");
             out.println("</html>");

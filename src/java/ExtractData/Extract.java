@@ -64,7 +64,7 @@ public class Extract
 
     public int sendGet(String repo) throws Exception
     {
-        repo=repo.replace("https://github.com/","").replace("/issues","").trim();                   //Remove Junk Entry
+        repo=repo.replace("https://","").replace("github.com/","").replace("/issues","").trim();                   //Remove Junk Entry
         String url="https://api.github.com/repos/"+repo+"/issues?";
         URL urlobj=new URL(url);
 	HttpURLConnection con=(HttpURLConnection)urlobj.openConnection();
