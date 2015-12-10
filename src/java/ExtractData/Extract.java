@@ -47,8 +47,12 @@ public class Extract
         long issue_update_time,time_diff_in_hours;
         
         for(int i=0;i<json.length();i++)                                                            //For each Issue
-        {
+        {   
             JSONObject obj=json.getJSONObject(i);
+            
+            if(!obj.getString("html_url").contains("issues"))
+                continue;
+            
             total_open++;                                                                           //Count of Open Issues
             issue_update_time=this.formatter.parse(obj.getString("created_at")).getTime();
             time_diff_in_hours=Math.abs(current_time-issue_update_time)/3600000;                    //Difference between current time & Issue Creation time in hours
@@ -64,11 +68,13 @@ public class Extract
 
     public int sendGet(String repo) throws Exception
     {
-        repo=repo.replace("https://","").replace("github.com/","").replace("/issues","").trim();                   //Remove Junk Entry
+        repo=repo.replace("https://","").replace("github.com/","").replace("/issues","").trim();    //Remove Junk Entry
         String url="https://api.github.com/repos/"+repo+"/issues?";
         URL urlobj=new URL(url);
 	HttpURLConnection con=(HttpURLConnection)urlobj.openConnection();
         con.setRequestMethod("GET");
+        
+        System.out.println(url);
         
         if(con.getResponseCode()!=200)                                                              //Error in Fetching Page
             return -1;
