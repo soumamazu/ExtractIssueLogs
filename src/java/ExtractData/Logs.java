@@ -8,44 +8,51 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/* Author: Soumadeep Mazumdar */
 
 public class Logs extends HttpServlet
 {
     protected void processRequest(HttpServletRequest request,HttpServletResponse response) throws Exception
     {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session=request.getSession();                                                   //Capture Current Session
+        String repo;
         
-        String repo=request.getParameter("element_1");
+        if(session.getAttribute("repo_name")==null)                                                 //If Repository Name is Session Attribute
+        {
+            repo=request.getParameter("repo");                                                      //Get Repository Name from Form
+            session.setAttribute("repo_name",repo);
+        }
+        else
+            repo=session.getAttribute("repo_name").toString();                                      //Set Repository Name as Session Attribute
+        
         Extract el=new Extract();
-        el.sendGet(repo);
+        int code=el.sendGet(repo);                                                                  //Get Counts
         
         try(PrintWriter out=response.getWriter())
         {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet IssueLogs</title>");
-            out.println("<style>\n"+"table, th, td {\n" +"    border: 1px solid black;\n"+
-                    "    border-collapse: collapse;\n" +"}\n" +"th, td {\n" +"    padding: 5px;\n"+
-                    "}\n" +"</style>");
-            out.println("</head>");
+            out.println("<title>Repository Issue Logs</title>");
             out.println("<body>");
-            out.println("<h1>Servlet IssueLogs at "+request.getContextPath()+"</h1>");
-            out.println("<p> Repository"+repo+"</p>");
             
+            out.println("</br><p>Repository:</br>"+repo+"</p>");
             
-            out.println("<table style=\"width:100%\">\n"+"  <tr>\n"+"    <th>Issue</th>\n"+
-                        "    <th>Last Update</th>		\n"+"  </tr>\n"+"  <tr>\n");
-            
-            for(Entry e:el.logs)
+            if(code==0)
             {
-                out.println("<tr>");
-                out.println("<td><a href="+e.url+">"+e.title+"</a></td>");
-                out.println("<td>"+e.date+"</td>");
-                out.println("</tr>");
+                out.println("</br><p>- Total number of open issues:</br>"+el.total_open+"</p>");
+                out.println("</br><p>- Number of open issues that were opened in the last 24 hours:</br>"+el.last_24+"</p>");
+                out.println("</br><p>- Number of open issues that were opened more than 24 hours ago but less than 7 days ago:</br>"+el.more_24_less_7+"</p>");
+                out.println("</br><p>- Number of open issues that were opened more than 7 days ago:</br>"+el.more_7+"</p>");
             }
+            else
+                out.println("</br><p>Repository Not Found!!!</p>");
             
-            out.println("</table>");
+            out.println("<button onclick=\"/ExtractIssueLogs/Logs\">Refresh</button>");
+            
             out.println("</body>");
             out.println("</html>");
         }
