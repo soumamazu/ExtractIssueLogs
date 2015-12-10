@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class Extract
 {
     public int total_open,last_24,more_24_less_7,more_7;                                            //Counts of Issues
-    private final String access_token="access_token=9f0b2863d76df03f7d579187b6a8565b8a104436";      //OAuth Token for API
+    private final String access_token="access_token="+System.getenv("access_token");                //OAuth Token for API
     private final SimpleDateFormat formatter;                                                       //Date Formatter
     
     public Extract()

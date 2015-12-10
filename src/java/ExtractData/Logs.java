@@ -40,14 +40,13 @@ public class Logs extends HttpServlet
             out.println("<body>");
             
             out.println("</br><p>Repository:</br>"+repo+"</p>");
-            out.println(System.getenv("access_token"));
             
             if(code==0)
             {
-                out.println("</br><p>- Total number of open issues:</br>"+el.total_open+"</p>");
-                out.println("</br><p>- Number of open issues that were opened in the last 24 hours:</br>"+el.last_24+"</p>");
-                out.println("</br><p>- Number of open issues that were opened more than 24 hours ago but less than 7 days ago:</br>"+el.more_24_less_7+"</p>");
-                out.println("</br><p>- Number of open issues that were opened more than 7 days ago:</br>"+el.more_7+"</p>");
+                out.println("</br><p>- Total number of open issues :"+el.total_open+"</p>");
+                out.println("</br><p>- Number of open issues that were opened in the last 24 hours :"+el.last_24+"</p>");
+                out.println("</br><p>- Number of open issues that were opened more than 24 hours ago but less than 7 days ago :"+el.more_24_less_7+"</p>");
+                out.println("</br><p>- Number of open issues that were opened more than 7 days ago :"+el.more_7+"</p>");
             }
             else
                 out.println("</br><p>Repository Not Found!!!</p>");
