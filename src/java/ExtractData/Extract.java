@@ -50,7 +50,7 @@ public class Extract
         {   
             JSONObject obj=json.getJSONObject(i);
             
-            if(!obj.getString("html_url").contains("issues"))
+            if(!obj.getString("html_url").contains("issues"))                                       //Eliminate Entries which are not Issues (pulls,etc.)
                 continue;
             
             total_open++;                                                                           //Count of Open Issues
