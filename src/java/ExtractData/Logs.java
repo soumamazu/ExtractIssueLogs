@@ -20,7 +20,8 @@ public class Logs extends HttpServlet
         HttpSession session=request.getSession();                                                   //Capture Current Session
         String repo;
         
-        if(session.getAttribute("repo_name")==null)                                                 //If Repository Name is Session Attribute
+        //If Repository Name is Session Attribute or a Different Input
+        if(session.getAttribute("repo_name")==null || session.getAttribute("repo_name")!=request.getParameter("repo"))
         {
             repo=request.getParameter("repo");                                                      //Get Repository Name from Form
             session.setAttribute("repo_name",repo);
