@@ -40,6 +40,7 @@ public class Logs extends HttpServlet
             out.println("<body>");
             
             out.println("</br><p>Repository:</br>"+repo+"</p>");
+            out.println(System.getenv("access_token"));
             
             if(code==0)
             {
