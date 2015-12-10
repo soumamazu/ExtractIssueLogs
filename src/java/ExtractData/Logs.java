@@ -43,7 +43,7 @@ public class Logs extends HttpServlet
 
             if(code==0)
             {
-                out.println("<table border=\"1\">");
+                out.println("<table border=\"1\" style=\"width:100%\">");
                 
                 out.println("<tr>");
                 out.println("<td>Total number of open issues :</td>");
@@ -70,7 +70,7 @@ public class Logs extends HttpServlet
             else
                 out.println("</br><p>Repository Not Found!!!</p>");
             
-            out.println("<button onclick=\"/ExtractIssueLogs/Logs\">Refresh</button>");
+            out.println("<br><br><button onclick=\"/ExtractIssueLogs/Logs\">Refresh</button>");
             out.println("<br><br>");
             out.println("<button onclick=\"/ExtractIssueLogs/\">Back</button>");
             
